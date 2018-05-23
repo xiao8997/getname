@@ -1,4 +1,6 @@
-package com.haoming;
+package com.haoming.controller;
+
+import com.haoming.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +22,12 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String strReferer =req.getHeader("Referer");
         String currentTime = dateFormat.format(new Date());
+        UserService us=new UserService();
         req.setAttribute("currentTime",currentTime);
+        req.setAttribute("strReferer",strReferer);
+        req.setAttribute("list",us.getUserList());
         req.getRequestDispatcher("/WEB-INF/jsp/hello.jsp").forward(req,resp);
     }
 }
