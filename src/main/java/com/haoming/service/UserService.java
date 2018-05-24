@@ -20,8 +20,7 @@ public class UserService {
     private final static Logger LOGGER = LoggerFactory.getLogger(UserService.class);
 
     public List<User> getUserList() {
-        Connection conn = DatabaseHelper.getConnection();
         String sql = "select * from user";
-        return DatabaseHelper.queryEntityList(User.class,conn,sql);
+        return DatabaseHelper.queryEntityList(User.class,sql);
     }
 }
